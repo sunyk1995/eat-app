@@ -40,12 +40,12 @@
 					for(let attr in data){
 						dataArr.push(data[attr])
 					}
-					console.log(dataArr)
 					const code = dataArr.filter(item=>{
 						return item.email === this.email && item.password === this.password;
 					})
 					if(code != null && code.length){
 						alert('登录成功')
+						this.$store.dispatch('setname',code[0].email)
 						this.$router.push('/home')
 						}
 					else{
