@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 		<div class="container">
-			<h1>sun11111111</h1>
+			<h1>我在这里进行了一次修改</h1>
 			<my-header></my-header>
 			<router-view></router-view>
 		</div>
