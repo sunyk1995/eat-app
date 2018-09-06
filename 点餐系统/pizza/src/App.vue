@@ -1,7 +1,6 @@
 <template>
   <div id="app">
 		<div class="container">
-			<h1>sun</h1>
 			<my-header></my-header>
 			<router-view></router-view>
 		</div>

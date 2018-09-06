@@ -12,13 +12,30 @@
 			<li><router-link class="nav-link" to="/about">关于我们</router-link></li>
 		</ul>
 		<ul class="navbar-nav ml-auto">
-			<li><router-link class="nav-link" to="/admin">注册</router-link></li>
-			<li><router-link class="nav-link" to="/login">登录</router-link></li>
+			<li><router-link class="nav-link" to="/admin" v-show='!isLogin'>注册</router-link></li>
+			<li class="nav-link" v-show='isLogin'>
+				{{username}}
+			</li>
+			<li><router-link class="nav-link" to="/login" v-show='isLogin'>[退出]</router-link></li>
+			<li><router-link class="nav-link" to="/login" v-show='!isLogin'>登录</router-link></li>
 
 		</ul>
 		</nav>
 	</header>
 </template>
+<script>
+	export default{
+		computed:{
+			isLogin(){
+				return this.$store.getters.isLogin
+			},
+			username(){
+				return this.$store.getters.username
+
+			}
+		}
+	}
+</script>
 <style scoped="scoped">
 	header{
 		margin-bottom: 50px;
