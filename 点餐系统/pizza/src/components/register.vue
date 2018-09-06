@@ -70,7 +70,7 @@
 						<tr v-for="item in allpizza">
 							<td>{{item.name}}</td>
 							<td>
-								<button class="btn btn-error">x</button>
+								<button class="btn btn-error" @click="remove(item.id)">x</button>
 							</td>
 						</tr>
 					</tbody>
@@ -85,14 +85,7 @@
 		data(){
 			return{
 				pizzas:{
-					name:'',
-					descript:'',
-					price1:'',
-					price2:'',
-					size1:'',
-					size2:''
 				},
-				allpizza:[],
 			}
 		},
 		methods:{
@@ -102,37 +95,45 @@
 					descript:this.pizzas.descript,
 					options:[
 						{
-							size1:this.pizzas.siza1,
-							price1:this.pizzas.price1
+							size:this.pizzas.size1,
+							price:this.pizzas.price1
 						},
 						{
-							size2:this.pizzas.siza2,
-							price2:this.pizzas.price2
+							size:this.pizzas.size2,
+							price:this.pizzas.price2
 						}
 					]
 				};
 				axios.post('/newadd.json',pizzait);
+				this.$store.commit('addData',pizzait)
+			},
+			remove(id){
+				axios.delete('/newadd/'+id + '.json').then(msg=>{
+					this.$store.commit('deleteData',id);
+				});
 			}
 		},
 		created:function(){
 			axios.get('/newadd.json').then(msg=>{
 				var data =msg.data;
-// 				for(var attr in data){
-// 					this.allpizza.push(data[attr])
-// 				}
-				this.allpizza = data;
-				console.log(this.allpizza)
-				
+				let arr = [];
+				for(let attr in data){
+					data[attr].id = attr;
+					arr.push(data[attr]);
+				}
+				this.$store.commit('setPizzaData',arr);
 			})
 		},
-// 		computed:{
-// 			fn(){
-// 				axios.get('/newadd.json').then(msg=>{
-// 					this.allpizza = msg.data;
-// 					
-// 				})
-// 				 return this.allpizza
-// 			}
-// 		}
+		computed:{
+			allpizza:{
+				get(){
+				return this.$store.state.menu
+				},
+				set(){
+					
+				}
+			}
+		}
+
 	}
 </script>

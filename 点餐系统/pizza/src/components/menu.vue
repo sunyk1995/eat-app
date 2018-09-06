@@ -42,45 +42,46 @@
 	</div>
 </template>
 <script>
+	import axios from 'axios'
 	export default{
 		data(){
 			return{
 				shopping:[],
-				menu:{
-					1: {
-					'name': '榴莲pizza',
-					'description': '这是喜欢吃榴莲朋友的最佳选择',
-					'options': [{
-						'size': 9,
-						'price': 38
-					}, {
-						'size': 12,
-						'price': 48
-					}]
-					},
-					2: {
-					'name': '芝士pizza',
-					'description': '芝士杀手,浓浓的芝士丝, 食欲瞬间爆棚',
-					'options': [{
-						'size': 9,
-						'price': 38
-					}, {
-						'size': 12,
-						'price': 48
-					}]
-					},
-					3: {
-					'name': '夏威夷pizza',
-					'description': '众多人的默认选择',
-					'options': [{
-						'size': 9,
-						'price': 36
-					}, {
-						'size': 12,
-						'price': 46
-					}]
-					}
-				}
+				// menu:{
+// 					1: {
+// 					'name': '榴莲pizza',
+// 					'description': '这是喜欢吃榴莲朋友的最佳选择',
+// 					'options': [{
+// 						'size': 9,
+// 						'price': 38
+// 					}, {
+// 						'size': 12,
+// 						'price': 48
+// 					}]
+// 					},
+// 					2: {
+// 					'name': '芝士pizza',
+// 					'description': '芝士杀手,浓浓的芝士丝, 食欲瞬间爆棚',
+// 					'options': [{
+// 						'size': 9,
+// 						'price': 38
+// 					}, {
+// 						'size': 12,
+// 						'price': 48
+// 					}]
+// 					},
+// 					3: {
+// 					'name': '夏威夷pizza',
+// 					'description': '众多人的默认选择',
+// 					'options': [{
+// 						'size': 9,
+// 						'price': 36
+// 					}, {
+// 						'size': 12,
+// 						'price': 46
+// 					}]
+// 					}
+				// }
 			}
 		},
 		methods:{
@@ -119,7 +120,15 @@
 					money += item.num* item.price;
 				})
 				return money
+			},
+			menu(){
+				return this.$store.state.menu
 			}
+		},
+		created:function(){
+			axios.get('/newadd.json').then(msg=>{
+				this.$store.commit('setPizzaData',msg.data)
+			})
 		}
 	}
 </script>
