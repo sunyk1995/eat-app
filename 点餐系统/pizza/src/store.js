@@ -23,15 +23,16 @@ export default new Vuex.Store({
 			addData(state,data){
 				state.menu.push(data);
 			},
-			useremail(state,data){
-				if(data){
-					state.isLogin = true;
-					state.username = data;
-				}else{
-					state.isLogin = false;
-					state.username = null;
-				}
+		loginstatu(state,data){
+			if(data){
+				state.username = data;
+				state.isLogin = true;				
+			}else{
+				state.username = null;
+				state.isLogin = false;
 			}
+
+		}
   },
 	getters:{
 		username(state){
@@ -43,8 +44,6 @@ export default new Vuex.Store({
 	
 	},
   actions:{
-			setname({commit},data){
-				commit('useremail',data);
-			}
+
   },
 })

@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
-axios.defaults.baseURL = 'https://wd9405736590jurssg.wilddogio.com/'
+axios.defaults.baseURL = 'https://wd6547965802nwnech.wilddogio.com/'
 Vue.config.productionTip = false
 // router.beforeEach((to,from,next)=>{
 // 	alert(1)

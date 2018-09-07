@@ -32,6 +32,9 @@
 				password:'',
 			}
 		},
+		beforeRouteEnter:(to,from,next)=>{
+			next(vm=> vm.$store.commit('loginstatu',null))
+		},
 		methods:{
 			reset(){
 				axios.get('/posts.json').then((msg)=>{
@@ -45,11 +48,12 @@
 					})
 					if(code != null && code.length){
 						alert('登录成功')
-						this.$store.dispatch('setname',code[0].email)
+						this.$store.commit('loginstatu',code[0].email)
 						this.$router.push('/home')
 						}
 					else{
 						alert('你输入的密码错误')
+						this.$store.commit('loginstatu',null)
 					}
 				})
 			}
